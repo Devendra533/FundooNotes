@@ -125,5 +125,17 @@ namespace BusinessLayer.Services
                 throw ex;
             }
         }
+
+        public Task<List<Note>> GetAllNotes(int userId)
+        {
+            try
+            {
+                return this.noteRL.GetAllNotes(userId);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
