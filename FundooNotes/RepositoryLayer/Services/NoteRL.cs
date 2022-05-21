@@ -111,10 +111,10 @@ namespace RepositoryLayer.Services
                     await fundoo.SaveChangesAsync();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                throw ex;
             }
         }
 
@@ -140,15 +140,35 @@ namespace RepositoryLayer.Services
                 await fundoo.SaveChangesAsync();
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                throw ex;
+            }
+        }
+        public async Task Remainder(int userId, int noteId, DateTime remainder)
+        {
+
+            try
+            {
+                var note = fundoo.Notes.FirstOrDefault(u => u.UserId == userId && u.NoteID == noteId);
+                if (note != null)
+                {
+                    note.IsRemainder = true;
+                    note.Remainder = remainder;
+                }
+                await fundoo.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
             }
         }
     }
-
-
-
-
 }
+
+
+
+
+
