@@ -164,5 +164,55 @@ namespace FundooNotes.Controllers
                 throw ex;
             }
         }
+
+        [Authorize]
+        [HttpPut("Trash/{noteId}")]
+        public async Task<ActionResult> IsTrash(int noteId)
+        {
+            try
+            {
+                var userid = User.Claims.FirstOrDefault(x => x.Type.ToString().Equals("userID", StringComparison.InvariantCultureIgnoreCase));
+                int userId = Int32.Parse(userid.Value);
+
+                var note = fundoo.Notes.FirstOrDefault(u => u.UserId == userId && u.NoteID == noteId);
+                if (note == null)
+                {
+                    return this.BadRequest(new { success = false, message = " Sorry!!! Failed to Trash Note" });
+                }
+                await this.noteBL.Trash(userId, noteId);
+                return this.Ok(new { success = true, message = "Trashed successfully!!!" });
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+
+    
+        [Authorize]
+        [HttpPut("IsPin/{noteId}")]
+        public async Task<ActionResult> IsPin(int noteId)
+        {
+            try
+            {
+                var userid = User.Claims.FirstOrDefault(x => x.Type.ToString().Equals("userID", StringComparison.InvariantCultureIgnoreCase));
+                int userId = Int32.Parse(userid.Value);
+
+                var note = fundoo.Notes.FirstOrDefault(u => u.UserId == userId && u.NoteID == noteId);
+                if (note == null)
+                {
+                    return this.BadRequest(new { success = false, message = " Sorry!!! Failed to Pin note" });
+                }
+                await this.noteBL.Pin(userId, noteId);
+                return this.Ok(new { success = true, message = "Pin Added successfully!!!" });
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+
     }
 }
