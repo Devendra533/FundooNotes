@@ -8,8 +8,6 @@ namespace RepositoryLayer.Entity
 {
     public class User
     {
-      
-
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int UserId { get; set; }
@@ -25,5 +23,4 @@ namespace RepositoryLayer.Entity
 
         public DateTime registerdDate { get; set; }
     }
-
 }

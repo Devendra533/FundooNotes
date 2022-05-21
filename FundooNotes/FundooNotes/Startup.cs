@@ -103,6 +103,13 @@ namespace FundooNotes
             app.UseRouting();
 
             app.UseAuthentication();
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+            app.UseHttpsRedirection();
+
+            app.UseRouting();
             app.UseAuthorization();
 
             app.UseSwagger();

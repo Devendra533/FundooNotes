@@ -151,9 +151,9 @@ namespace RepositoryLayer.Services
             }
         }
 
-        public string GenerateToken(string email)
+        public string GenerateToken(string Email)
         {
-            if (email == null)
+            if (Email == null)
             {
                 return null;
             }
@@ -163,7 +163,7 @@ namespace RepositoryLayer.Services
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim("Email", email)
+                    new Claim("Email",Email)
                 }),
                 Expires = DateTime.UtcNow.AddHours(1),
 
@@ -176,18 +176,18 @@ namespace RepositoryLayer.Services
             return tokenHandler.WriteToken(token);
         }
 
-        public static string EncryptPassword(string password)
+        public static string EncryptPassword(string Password)
         {
             try
             {
-                if (string.IsNullOrEmpty(password))
+                if (string.IsNullOrEmpty(Password))
                 {
                     return null;
 
                 }
                 else
                 {
-                    byte[] b = Encoding.ASCII.GetBytes(password);
+                    byte[] b = Encoding.ASCII.GetBytes(Password);
                     string encrypted = Convert.ToBase64String(b);
                     return encrypted;
                 }
